@@ -23,6 +23,7 @@ public class RegistrationService {
     @Value("${amqp.routing.key}")
     private String appRoutingKey;
 
+    // New Visitor
     @Transactional
     public Boolean register(ExtendedPersonFrontEnd personFrontEnd) {
         ExtendedPerson extendedPerson = transformFrontEndPerson(personFrontEnd);
@@ -53,6 +54,19 @@ public class RegistrationService {
                 .status(personFE.getStatus())
                 .build();
     }
+
+    // Returning Visitor : get visitor by phonenumber
+    // ?? Not sure how to return - HTTPStatus --> 404, if not successful
+
+    @Transactional
+    public Person getPersonByPhone(String phoneNumber){
+        Long phone = Long.parseLong(phoneNumber.replaceAll("[^0-9]", ""));
+        return personRepository.findByPhoneNumber(phone);
+    }
+
+
+    //
+
 
     public void sendMessage(String exchange, String routingKey, Object data) {
         LOGGER.info("Sending message to the queue using routingKey {}. Message= {}", routingKey, data);

@@ -1,4 +1,4 @@
-package com.galvanize.badgearamaregistration;
+package com.galvanize.badgearamaregistration.entity;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,24 +1,23 @@
-package com.galvanize.badgearamaregistration;
+package com.galvanize.badgearamaregistration.entity;
 
+import com.galvanize.badgearamaregistration.utility.VisitStatus;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
 @Data
-public class ExtendedPerson {
-    private Long id;
+@NoArgsConstructor
+public class ExtendedPersonFrontEnd {
 
-    private Long phoneNumber;
-
-    private String firstName;
-    private String lastName;
-    private String company;
-
-    private String hostName;
-    private Long hostPhoneNumber;
-    private String purposeOfVisit;
-
+    private String phoneNumber;        // populated by user
+    private String firstName;          // populated by user
+    private String lastName;           // populated by user
+    private String company;            // populated by user
+    private String hostName;           // populated by user
+    private String hostPhone;          // populated by user
+    private String purposeOfVisit;     // populated by user
     private String checkedInBy;        // populated by system
     private String checkedOutBy;       // populated by system
     private String reasonForDeletion;  // populated by guard
@@ -30,19 +29,16 @@ public class ExtendedPerson {
 
     private Boolean active;            // populated by system/guard
     private VisitStatus status;        // populated by system
+    //private VisitorType visitorType;   // populated by user
 
     @Builder
-    public ExtendedPerson(Long id, Long phoneNumber, String firstName, String lastName, String company,
-                          String hostName, Long hostPhoneNumber, String purposeOfVisit, String checkedInBy,
-                          String checkedOutBy, String reasonForDeletion, String badgeNumber,
-                          Date registerDate, Date checkedInDate, Date checkedOutDate, Boolean active, VisitStatus status) {
-        this.id = id;
+    public ExtendedPersonFrontEnd(String phoneNumber, String firstName, String lastName, String company, String hostName, String hostPhone, String purposeOfVisit, String checkedInBy, String checkedOutBy, String reasonForDeletion, String badgeNumber, Date registerDate, Date checkedInDate, Date checkedOutDate, Boolean active, VisitStatus status) {
         this.phoneNumber = phoneNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.company = company;
         this.hostName = hostName;
-        this.hostPhoneNumber = hostPhoneNumber;
+        this.hostPhone = hostPhone;
         this.purposeOfVisit = purposeOfVisit;
         this.checkedInBy = checkedInBy;
         this.checkedOutBy = checkedOutBy;

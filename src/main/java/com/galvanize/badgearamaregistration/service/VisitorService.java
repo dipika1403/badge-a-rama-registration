@@ -5,23 +5,22 @@ import com.galvanize.badgearamaregistration.entity.ExtendedPersonFrontEnd;
 import com.galvanize.badgearamaregistration.entity.Person;
 import com.galvanize.badgearamaregistration.exception.GuestNotFoundException;
 import com.galvanize.badgearamaregistration.exception.StatusUpdateFailureException;
-import com.galvanize.badgearamaregistration.repository.PersonRepository;
+import com.galvanize.badgearamaregistration.repository.VisitorRepository;
 import com.galvanize.badgearamaregistration.utility.VisitStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class RegistrationService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationService.class);
+public class VisitorService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(VisitorService.class);
 
     @Autowired
-    PersonRepository personRepository;
+    VisitorRepository personRepository;
     @Autowired
     RabbitTemplate rabbitTemplate;
 
@@ -94,12 +93,7 @@ public class RegistrationService {
     }
 
 
-    @Transactional
-    public String setVisitorCheckIn(ExtendedPersonFrontEnd extendedPersonFrontEnd) {
-        String response = UpdateExtendedPersonFrontEnd(extendedPersonFrontEnd , "IN");
-        return response;
 
-    }
 
     public void sendMessage(String exchange, String routingKey, Object data) {
         LOGGER.info("Sending message to the queue using routingKey {}. Message= {}", routingKey, data);

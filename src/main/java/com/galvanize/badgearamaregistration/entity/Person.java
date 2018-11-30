@@ -18,7 +18,6 @@ public class Person {
     @Id
 //    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long phoneNumber;
-
     private String firstName;
     private String lastName;
     private String company;

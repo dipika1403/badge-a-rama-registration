@@ -33,6 +33,7 @@ public class VisitorService {
     // New Visitor
     @Transactional
     public Boolean register(ExtendedPersonFrontEnd personFrontEnd) {
+        LOGGER.info("**** personFE :"+ personFrontEnd.toString());
         ExtendedPerson extendedPerson = transformFrontEndPerson(personFrontEnd);
         personRepository.save(Person.builder()
                 .phoneNumber(extendedPerson.getPhoneNumber())
@@ -45,9 +46,18 @@ public class VisitorService {
         return true;
     }
 
+    private Long convertPhoneStringToLong(String phone){
+        return Long.parseLong(phone.replaceAll("[^0-9]", ""));
+    }
+
     public ExtendedPerson transformFrontEndPerson(ExtendedPersonFrontEnd personFE) {
+
+        LOGGER.info("**** personFE :"+ personFE.toString());
+        LOGGER.info("**** personFE phone : " + personFE.getPhoneNumber());
+        Long phone = convertPhoneStringToLong(personFE.getPhoneNumber());
+
         return ExtendedPerson.builder()
-                .phoneNumber(Long.parseLong(personFE.getPhoneNumber().replaceAll("[^0-9]", "")))
+                .phoneNumber(phone)
                 .firstName(personFE.getFirstName())
                 .lastName(personFE.getLastName())
                 .company(personFE.getCompany())
